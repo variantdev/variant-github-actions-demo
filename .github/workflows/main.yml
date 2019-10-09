@@ -1,0 +1,27 @@
+name: Do something
+on:
+  # https://help.github.com/en/articles/events-that-trigger-workflows#pull-request-event-pull_request
+  pull_request:
+    # Defaults to [opened, synchronize, reopened] so specifically set types when you want more:
+    types: [opened, reopened, edited, milestoned, demilestoned, labeled, unlabeled, synchronize ]
+  # https://help.github.com/en/articles/events-that-trigger-workflows#issues-event-issues
+  issues:
+    types: [opened, reopened, edited, milestoned, demilestoned, labeled, unlabeled]
+
+jobs:
+  run:
+    name: variant
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - uses: actions/setup-variant@v1
+      with:
+        variant-version: '0.36.0' # The Variant version to download (if necessary) and use.
+    - run: variant version
+    - run: varaint --color=false
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        VARIANT_WORKING_DIR: "."
+        VARIANT_RUN: ${{ github.event.comment.body }}
+        VARIANT_RUN_TRIM_PREFIX: /
+        VARIANT_GITHUB_COMMENT: "true"

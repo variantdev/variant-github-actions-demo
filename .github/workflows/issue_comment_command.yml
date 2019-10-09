@@ -13,8 +13,10 @@ jobs:
     - uses: variantdev/setup-variant@v1
       with:
         variant-version: '0.36.0' # The Variant version to download (if necessary) and use.
-    - run: variant version
-    - run: variant --color=false
+    - name: show variant version
+      run: variant version
+    - name: run variant
+      run: variant --color=false
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         VARIANT_WORKING_DIR: "."

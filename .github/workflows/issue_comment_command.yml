@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
-    - uses: actions/setup-variant@v1
+    - uses: variantdev/setup-variant@v1
       with:
         variant-version: '0.36.0' # The Variant version to download (if necessary) and use.
     - run: variant version

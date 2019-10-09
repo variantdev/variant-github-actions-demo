@@ -14,7 +14,7 @@ jobs:
       with:
         variant-version: '0.36.0' # The Variant version to download (if necessary) and use.
     - run: variant version
-    - run: varaint --color=false
+    - run: variant --color=false
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         VARIANT_WORKING_DIR: "."

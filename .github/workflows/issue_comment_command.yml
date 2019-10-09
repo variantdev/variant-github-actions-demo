@@ -12,7 +12,7 @@ jobs:
     - uses: actions/checkout@v1
     - uses: variantdev/setup-variant@v1
       with:
-        variant-version: '0.36.0' # The Variant version to download (if necessary) and use.
+        variant-version: '0.36.1' # The Variant version to download (if necessary) and use.
     - name: show variant version
       run: variant version
     - name: run variant

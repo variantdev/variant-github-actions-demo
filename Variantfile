@@ -11,3 +11,10 @@ tasks:
   foo:
     script: |
       echo foo!
+  fail:
+    script: |
+      echo simulated failure
+      exit 2
+  dockerrun:
+    script: |
+      docker run --rm alpine:3.9 sh -c 'echo hello docker!'

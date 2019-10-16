@@ -1,4 +1,4 @@
-name: releasenote
+name: checksuite-releasenote
 
 on:
   check_suite:

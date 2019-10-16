@@ -1,0 +1,12 @@
+on: [pull_request]
+
+jobs:
+  check-releasenote:
+    runs-on: ubuntu-latest
+    name: A job to ensure that a releasenote is written if necessary
+    steps:
+    - uses: actions/checkout@v1
+    - name: docker test
+      uses: docker://variantdev/actions:latest
+      with:
+        args: pullvet -require-any -label releasenote/none -note releasenote

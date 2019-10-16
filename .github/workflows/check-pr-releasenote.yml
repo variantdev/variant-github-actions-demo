@@ -1,4 +1,8 @@
-on: [pull_request]
+name: releasenote
+
+on:
+  pull_request:
+    types: [opened, reopened, edited, milestoned, demilestoned, labeled, unlabeled, synchronize ]
 
 jobs:
   check-releasenote:

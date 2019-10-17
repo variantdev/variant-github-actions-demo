@@ -19,6 +19,8 @@ tasks:
     script: |
       uname -a
       echo GITHUB_REPOSITORY: $GITHUB_REPOSITORY
+      REPO=$GITHUB_REPOSITORY
+      REPO=${REPO/*\/}
       docker run \
         --workdir /github/workspace \
         --rm \
@@ -45,4 +47,4 @@ tasks:
         -v "/var/run/docker.sock":"/var/run/docker.sock" \
         -v "/home/runner/work/_temp/_github_home":"/github/home" \
         -v "/home/runner/work/_temp/_github_workflow":"/github/workflow" \
-        -v "/home/runner/work/variant-github-actions-demo/variant-github-actions-demo":"/github/workspace" alpine:3.9 sh -c 'echo hello docker!; cat somefile; ls -lah /github/home'
+        -v "/home/runner/work/${REPO}/${REPO}":"/github/workspace" alpine:3.9 sh -c 'echo hello docker!; cat somefile; ls -lah /github/home'

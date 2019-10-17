@@ -71,7 +71,7 @@ on:
     - converted
     - edited
     - deleted
-  project_colum:
+  project_column:
     types:
     - created
     - updated

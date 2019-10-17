@@ -1,0 +1,22 @@
+name: variant-action-issue-comment
+on:
+  # https://help.github.com/en/articles/events-that-trigger-workflows#issue-comment-event-issue_comment
+  issue_comment:
+    types: [created, edited]
+
+jobs:
+  run:
+    name: variant
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - uses: variantdev/variant-action@master
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        VARIANT_WORKING_DIR: "."
+        VARIANT_COMMENT: "true"
+        VARIANT_RUN: ${{ github.event.comment.body }}
+        VARIANT_RUN_TRIM_PREFIX: /
+      with:
+        args: --color=false
+      if: startsWith(github.event.comment.body, '/')

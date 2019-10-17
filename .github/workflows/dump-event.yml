@@ -40,7 +40,7 @@ on:
     - unlocked
     - milestoned
     - demilestoned
-  labels:
+  label:
     types:
     - created
     - edited

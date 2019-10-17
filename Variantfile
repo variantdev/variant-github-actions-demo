@@ -17,6 +17,7 @@ tasks:
       exit 2
   dockerrun:
     script: |
+      echo GITHUB_REPOSITORY: $GITHUB_REPOSITORY
       docker run \
         --workdir /github/workspace \
         --rm \

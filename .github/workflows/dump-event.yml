@@ -13,7 +13,8 @@ on:
     - completed
     - requested
     - rerequested
-  commit_comment: {}
+# says `commit_comment is not a valid event name`. what's the correct name?
+#  commit_comment: {}
   deployment: {}
   deployment_status: {}
   issue_comment:

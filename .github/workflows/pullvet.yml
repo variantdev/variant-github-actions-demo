@@ -1,0 +1,48 @@
+name: pullvet
+
+on:
+  pull_request:
+    types: [opened, reopened, edited, milestoned, demilestoned, labeled, unlabeled, synchronize ]
+  issues:
+    # Seems like github doesn't send milestoned/demilestoned as pull_request even though it is really a pull request
+    # See https://github.com/danger/peril/issues/341
+    types: [milestoned, demilestoned]
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: docker://variantdev/actions:latest
+      with:
+        args: pullvet -require-any -label releasenote/none -note releasenote
+      env:
+        GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+  action:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: variantdev/setup-go-actions@v1
+      with:
+        go-actions-version: '0.5'
+    - run: actions exec -status-context releasenote -status-description required -- actions pullvet -require-any -label releasenote/none -note releasenote
+      env:
+        GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+  milestone:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: variantdev/setup-go-actions@v1
+      with:
+        go-actions-version: '0.5'
+    - run: |
+        actions exec -status-context milestone -- actions pullvet -require-any -milestone-match 'test-v.+' label milestone/none
+      env:
+        GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+  size-label:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: variantdev/setup-go-actions@v1
+      with:
+        go-actions-version: '0.5'
+    - run: |
+        actions exec -status-context label -- actions pullvet -require-any -label-match 'size/.+'
+      env:
+        GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}

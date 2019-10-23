@@ -21,8 +21,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: variantdev/setup-go-actions@v1
-      with:
-        go-actions-version: '0.5'
+#      with:
+#        go-actions-version: '0.5'
     - run: actions exec -status-context releasenote -status-description required -- actions pullvet -require-any -label releasenote/none -note releasenote
       env:
         GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
@@ -30,8 +30,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: variantdev/setup-go-actions@v1
-      with:
-        go-actions-version: '0.5'
+#      with:
+#        go-actions-version: '0.5'
     - run: |
         actions exec -status-context milestone -- actions pullvet -require-any -milestone-match 'test-v.+' label milestone/none
       env:
@@ -40,8 +40,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: variantdev/setup-go-actions@v1
-      with:
-        go-actions-version: '0.5'
+ #     with:
+#        go-actions-version: '0.5'
     - run: |
         actions exec -status-context label -- actions pullvet -require-any -label-match 'size/.+'
       env:
